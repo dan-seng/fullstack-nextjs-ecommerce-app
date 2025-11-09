@@ -1,35 +1,40 @@
 
-
-```markdown
 # 🌐 E-Commerce Application
 
 ![Tech Neon Divider](https://img.shields.io/badge/Tech-Cyberpunk-ff00ff?style=for-the-badge&logo=appveyor)
 
-A **cutting-edge, full-stack e-commerce platform** built with **Next.js**, **React**, and **TypeScript**. Explore products, manage your cart, and checkout seamlessly with Stripe — all wrapped in a **neon cyberpunk vibe**.  
+A **cutting-edge, full-stack e-commerce platform** built with **Next.js**, **React**, and **TypeScript**. Explore products, manage your cart, and checkout seamlessly with Stripe — all wrapped in a **neon cyberpunk vibe**.
 
 **🔗 Live Demo:** [E-shemeta](https://eshemeta.vercel.app/)
 
 ## 🚀 Features
-- **🛒 Product Catalog:** Browse through an immersive collection of products with detailed views.  
-- **🛍️ Shopping Cart:** Add/remove items and manage quantities effortlessly.  
-- **💳 Checkout Process:** Secure payments via Stripe integration.  
-- **📱 Responsive Design:** Perfectly optimized for desktop and mobile devices.  
-- **🎨 Modern UI:** Built with Tailwind CSS and custom reusable components.  
-- **⚡ State Management:** Powered by Zustand for ultra-fast, reactive cart updates.  
-- **💾 Persistent Cart:** Cart data survives page reloads for seamless shopping.  
+
+- **🛒 Product Catalog:** Browse through an immersive collection of products with detailed views
+- **🛍️ Shopping Cart:** Add/remove items and manage quantities effortlessly
+- **💳 Checkout Process:** Secure payments via Stripe integration
+- **📱 Responsive Design:** Perfectly optimized for desktop and mobile devices
+- **🎨 Modern UI:** Built with Tailwind CSS, Shadcn UI, and custom reusable components
+- **⚡ State Management:** Powered by Zustand for ultra-fast, reactive cart updates
+- **💾 Persistent Cart:** Cart data survives page reloads for seamless shopping
 
 ## 🛠 Tech Stack
-| Technology | Icon |
-|------------|------|
-| **Next.js 16** | ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) |
-| **React 19** | ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black) |
-| **TypeScript** | ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) |
-| **Tailwind CSS** | ![Tailwind](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white) |
-| **Zustand** | ![Zustand](https://img.shields.io/badge/Zustand-000000?style=for-the-badge&logo=zeit&logoColor=white) |
-| **Stripe** | ![Stripe](https://img.shields.io/badge/Stripe-635BFF?style=for-the-badge&logo=stripe&logoColor=white) |
-| **Lucide Icons** | ![Lucide](https://img.shields.io/badge/Lucide-000000?style=for-the-badge&logo=lucide&logoColor=white) |
+
+<div style="display: flex; grid-template-r: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
+<img height="55" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" />&nbsp; 
+<img height="55" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" />&nbsp; 
+  <img height="55" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" />&nbsp; 
+<img height="55" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" />&nbsp; 
+  <img height="55" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/zustand/zustand-original.svg" />&nbsp; 
+<img height="55" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/1280px-Stripe_Logo%2C_revised_2016.svg.png" />  
+<img width="55" src="https://images.seeklogo.com/logo-png/51/2/shadcn-ui-logo-png_seeklogo-519786.png" />
+<img height="55" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkq-qvtMS8B3VEYbUtIkDb6Kfo2X1fwdj3RQ&s" />
+ 
+
+
+</div>
 
 ## 📂 Project Structure
+
 ```
 
 /
@@ -54,33 +59,37 @@ A **cutting-edge, full-stack e-commerce platform** built with **Next.js**, **Rea
 ````
 
 ## ⚙️ Installation
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd ecommerce
+
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd ecommerce
 ````
 
-2. Install dependencies:
+2. **Install dependencies:**
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
-3. Set up environment variables:
+3. **Set up environment variables:**
+
    Create a `.env` file in the root directory:
 
-```
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
-STRIPE_SECRET_KEY=your_stripe_secret_key
-```
+   ```env
+   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+   STRIPE_SECRET_KEY=your_stripe_secret_key
+   ```
 
-4. Run the development server:
+4. **Run the development server:**
 
-```bash
-npm run dev
-```
+   ```bash
+   npm run dev
+   ```
 
-5. Open [http://localhost:3000](http://localhost:3000) to explore your neon marketplace.
+5. **Open your browser:**
+
+   Navigate to [http://localhost:3000](http://localhost:3000) to explore your neon marketplace.
 
 ## 🧩 Cart Management
 
@@ -92,17 +101,17 @@ The application uses **Zustand** with persistent storage for fast and reactive c
 
 ## ⚡ Deployment
 
-1. Build the production version:
+1. **Build the production version:**
 
-```bash
-npm run build
-```
+   ```bash
+   npm run build
+   ```
 
-2. Start production server:
+2. **Start production server:**
 
-```bash
-npm start
-```
+   ```bash
+   npm start
+   ```
 
 **Or deploy directly to Vercel for instant cyberpunk vibes!**
 
@@ -115,16 +124,4 @@ MIT License — see the [LICENSE](LICENSE) file for details.
 * [Next.js Documentation](https://nextjs.org/docs)
 * [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 * [Stripe Documentation](https://stripe.com/docs)
-
-## 🌌 Futuristic Cyberpunk Notes
-
-* Neon gradients and glowing badges throughout the project
-* Optimized for speed and smooth UX
-* Built for **modern devs** who love clean + cyber aesthetics
-* Ready to scale with hybrid state + auto translations (Amharic & English)
-
-```
-
----
-
-```
+* [Shadcn UI](https://ui.shadcn.com/)
