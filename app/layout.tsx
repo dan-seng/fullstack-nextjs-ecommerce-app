@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Noto_Sans_Ethiopic} from "next/font/google";
 import "./globals.css";
 import Navbar from '../components/navbar'
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,6 +12,11 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const notoSansEthiopic = Noto_Sans_Ethiopic({
+  variable: "--font-noto-sans-ethiopic",
+  subsets: ["ethiopic"],
 });
 
 export const metadata: Metadata = {
@@ -26,8 +32,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className="flex min-h-full flex-col bg-white"
-      > 
+        className={`flex min-h-full flex-col bg-white ${geistSans.variable} ${geistMono.variable} ${notoSansEthiopic.variable}`}
+      >
       <Navbar />
        <main className="grow container mx-auto px-4 py-8">
          {children}
