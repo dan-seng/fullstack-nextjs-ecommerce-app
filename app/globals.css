@@ -1,4 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "tailwindcss";
+
+body {
+  font-family: 'Poppins', sans-serif;  
+  }
 
 @font-face {
   font-family: 'kiros';
@@ -20,8 +25,6 @@
 .raya{
   font-family: 'goffa', sans-serif;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -65,10 +68,7 @@
     border-width: 2px;
     border-color: var(--color-border);
   }
-  body {
-    @apply bg-[rgb(var(--color-background))] text-[rgb(var(--color-foreground))];
-    font-family: 'Poppins', sans-serif;  
-  }
+  
 }
 
 :root {
@@ -187,5 +187,86 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Component-specific dark mode styles */
+@layer components {
+  /* Card styles */
+  .card {
+    @apply bg-card text-card-foreground border-border;
+  }
+  
+  /* Product card hover states */
+  .product-card {
+    @apply bg-card border-border hover:border-primary/20;
+  }
+  
+  /* Button styles */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+  
+  /* Input and form elements */
+  .input-field {
+    @apply bg-background border-border text-foreground placeholder:text-muted-foreground;
+  }
+  
+  /* Navigation */
+  .nav-link {
+    @apply text-foreground hover:text-primary;
+  }
+  
+  /* Cart badge */
+  .cart-badge {
+    @apply bg-destructive text-destructive-foreground;
+  }
+  
+  /* Gray backgrounds that need dark mode */
+  .bg-gray-50 {
+    @apply bg-muted;
+  }
+  
+  .bg-gray-100 {
+    @apply bg-muted;
+  }
+  
+  /* Text colors */
+  .text-gray-600 {
+    @apply text-muted-foreground;
+  }
+  
+  .text-gray-500 {
+    @apply text-muted-foreground;
+  }
+  
+  /* Borders */
+  .border-gray-200 {
+    @apply border-border;
+  }
+  
+  .border-gray-300 {
+    @apply border-border;
+  }
+  
+  /* Hover states */
+  .hover\\:bg-gray-100:hover {
+    @apply hover:bg-accent;
+  }
+  
+  .hover\\:bg-gray-800:hover {
+    @apply hover:bg-accent;
+  }
+  
+  .hover\\:text-blue-600:hover {
+    @apply hover:text-primary;
+  }
+  
+  .hover\\:border-gray-300:hover {
+    @apply hover:border-primary/20;
   }
 }

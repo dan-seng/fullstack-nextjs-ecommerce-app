@@ -1,7 +1,7 @@
 "use client";
 
 import Stripe from "stripe";
-import { Card, CardContent, CardTitle } from "./ui/card";
+import { Card } from "./ui/card";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
@@ -12,115 +12,117 @@ interface Props {
 
 export const Carousel = ({ products }: Props) => {
     const [current, setCurrent] = useState<number>(0);
+    const [imageError, setImageError] = useState(false);
     
+    const fallbackImage = "/placeholder-product.svg";
+    const currentProduct = products[current];
+    const price = currentProduct?.default_price as Stripe.Price;
+    const imageSrc = imageError || !currentProduct?.images?.[0] ? fallbackImage : currentProduct.images[0];
+    
+    // Reset image error state when slide changes
+    useEffect(() => {
+        setImageError(false);
+    }, [current]);
+
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrent((prev: number) => (prev + 1) % products.length);
-        }, 4000);
+        }, 5000); // Increased to 5s for a more relaxed, premium feel
         return () => clearInterval(interval);
     }, [products.length]);
 
-    const nextSlide = () => {
-        setCurrent((prev) => (prev + 1) % products.length);
-    };
+    const nextSlide = () => setCurrent((prev) => (prev + 1) % products.length);
+    const prevSlide = () => setCurrent((prev) => (prev - 1 + products.length) % products.length);
+    const goToSlide = (index: number) => setCurrent(index);
 
-    const prevSlide = () => {
-        setCurrent((prev) => (prev - 1 + products.length) % products.length);
-    };
-
-    const goToSlide = (index: number) => {
-        setCurrent(index);
-    };
-
-    const currentProduct = products[current];
-    const price = currentProduct.default_price as Stripe.Price;
+    if (!products?.length) return null;
 
     return (
-        <div className="relative group">
-           
+        <div className="relative group w-full max-w-7xl mx-auto">
+            {/* Navigation Arrows */}
             <button 
                 onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/80 text-white p-2 rounded-full 
-                         opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-black 
-                         hover:scale-110 lg:opacity-100 lg:bg-black/50"
+                className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-40 bg-white/10 backdrop-blur-md border border-white/20 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 hover:bg-white hover:text-black hover:scale-110 shadow-xl"
             >
-                <ChevronLeftIcon className="w-6 h-6" />
+                <ChevronLeftIcon className="w-6 h-6 stroke-2" />
             </button>
             
             <button 
                 onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/80 text-white p-2 rounded-full 
-                         opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-black 
-                         hover:scale-110 lg:opacity-100 lg:bg-black/50"
+                className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-40 bg-white/10 backdrop-blur-md border border-white/20 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 hover:bg-white hover:text-black hover:scale-110 shadow-xl"
             >
-                <ChevronRightIcon className="w-6 h-6" />
+                <ChevronRightIcon className="w-6 h-6 stroke-2" />
             </button>
 
-            <Card className="relative overflow-hidden rounded-xl shadow-2xl border-0 bg-linear-to-br from-gray-50 to-white">
-                {currentProduct.images && currentProduct.images[0] && (
-                    <div className="relative h-96 w-full md:h-[500px]">
-                        <Image
-                            alt={currentProduct.name}
-                            src={currentProduct.images[0]}
-                            fill
-                            className="object-contain transition-transform duration-700 ease-out"
-                            priority
-                        />
-                        
-                       
-                        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
-                    </div>
-                )}
+            {/* Main Card Container */}
+            <Card className="relative h-[500px] md:h-[650px] w-full overflow-hidden rounded-[2.5rem] border border-white/10 bg-neutral-950 shadow-2xl">
                 
+                {/* Background Glow / Ambiance */}
+                <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 via-neutral-950 to-black opacity-80" />
                 
-                <CardContent className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
-                    <div className="space-y-3 md:space-y-4">
-                        <CardTitle className="text-2xl font-bold tracking-tight md:text-4xl lg:text-5xl">
-                            {currentProduct.name}
-                        </CardTitle>
-                        
-                        {price && price.unit_amount && (
-                            <div className="flex items-center gap-4">
-                                <p className="text-xl font-semibold md:text-2xl lg:text-3xl">
-                                    ${(price.unit_amount / 100).toFixed(2)}
-                                </p>
-                                {currentProduct.metadata?.originalPrice && (
-                                    <p className="text-lg line-through text-gray-300 md:text-xl">
-                                        ${currentProduct.metadata.originalPrice}
-                                    </p>
-                                )}
-                            </div>
-                        )}
-                        
-                        {currentProduct.description && (
-                            <p className="text-sm text-gray-200 max-w-2xl md:text-base lg:text-lg">
-                                {currentProduct.description}
-                            </p>
-                        )}
-                    </div>
-                </CardContent>
-
-                <div className="absolute top-4 left-4 right-4 z-10">
-                    <div className="w-full bg-white/30 rounded-full h-1">
-                        <div 
-                            className="bg-white h-1 rounded-full transition-all duration-100 ease-linear"
-                            style={{ width: `${((current + 1) / products.length) * 100}%` }}
-                        />
-                    </div>
+                {/* Product Image */}
+                <div className="absolute inset-0 flex items-center justify-center p-12 md:p-24 z-10">
+                    <Image
+                        alt={currentProduct.name}
+                        src={imageSrc}
+                        fill
+                        className="object-contain p-8 md:p-16 drop-shadow-2xl transition-all duration-1000 ease-out group-hover:scale-110 group-hover:-translate-y-4"
+                        priority
+                        onError={() => setImageError(true)}
+                        unoptimized={imageError}
+                    />
                 </div>
+                
+                {/* Heavy Bottom Gradient for Text Readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20 pointer-events-none" />
 
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex space-x-2 md:bottom-6">
+                {/* Top Indicators (Expanding Pills) */}
+                <div className="absolute top-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 bg-black/30 backdrop-blur-xl px-4 py-3 rounded-full border border-white/10 shadow-lg">
                     {products.map((_, index) => (
                         <button
                             key={index}
                             onClick={() => goToSlide(index)}
-                            className={`w-2 h-2 rounded-full transition-all duration-300 md:w-3 md:h-3 ${
+                            className={`h-1.5 rounded-full transition-all duration-500 ease-out ${
                                 index === current 
-                                    ? 'bg-white scale-125' 
-                                    : 'bg-white/50 hover:bg-white/80'
+                                    ? 'w-8 bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]' 
+                                    : 'w-2 bg-white/30 hover:bg-white/60'
                             }`}
+                            aria-label={`Go to slide ${index + 1}`}
                         />
                     ))}
+                </div>
+                
+                {/* Bottom Content (Glassmorphism Pane) */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 z-30">
+                    <div className="backdrop-blur-xl bg-white/10 border border-white/10 p-6 md:p-8 rounded-[2rem] shadow-2xl flex flex-col md:flex-row md:items-end justify-between gap-6 transform transition-transform duration-500 group-hover:bg-white/15">
+                        
+                        <div className="space-y-3 max-w-2xl">
+                            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tighter leading-none drop-shadow-md">
+                                {currentProduct.name}
+                            </h2>
+                            
+                            {currentProduct.description && (
+                                <p className="text-sm md:text-base text-neutral-300 font-medium line-clamp-2 md:line-clamp-3 leading-relaxed">
+                                    {currentProduct.description}
+                                </p>
+                            )}
+                        </div>
+
+                        {/* Price Badge */}
+                        {price && price.unit_amount && (
+                            <div className="shrink-0 flex items-center gap-3 bg-white text-black px-6 py-3 rounded-full shadow-lg">
+                                <span className="text-xl md:text-2xl font-black tracking-tight">
+                                    ${(price.unit_amount / 100).toFixed(2)}
+                                </span>
+                                {currentProduct.metadata?.originalPrice && (
+                                    <span className="text-sm md:text-base font-medium text-neutral-500 line-through">
+                                        ${currentProduct.metadata.originalPrice}
+                                    </span>
+                                )}
+                            </div>
+                        )}
+
+                    </div>
                 </div>
             </Card>
         </div>

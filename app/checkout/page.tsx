@@ -38,9 +38,9 @@ export default function Checkout(){
                 </CardHeader>
                 <CardContent className="space-y-4">
                     {items.map((item) => (
-                        <div key={item.id} className="flex gap-4 border-b pb-4 last:border-0">
+                        <div key={item.id} className="flex gap-4 border-border pb-4 last:border-0">
                             {item.imageUrl && (
-                                <div className="relative h-16 w-16 bg-gray-50 rounded border">
+                                <div className="relative h-16 w-16 bg-muted rounded border-border">
                                     <Image
                                         alt={item.name}
                                         src={item.imageUrl}

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans_Ethiopic} from "next/font/google";
 import "./globals.css";
 import Navbar from '../components/navbar'
+import Footer from '../components/footer'
+import { ThemeProvider } from "@/lib/theme-provider"
 
 
 const geistSans = Geist({
@@ -30,14 +32,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`flex min-h-full flex-col bg-white ${geistSans.variable} ${geistMono.variable} ${notoSansEthiopic.variable}`}
+        className={`flex min-h-full flex-col bg-background text-foreground ${geistSans.variable} ${geistMono.variable} ${notoSansEthiopic.variable}`}
       >
-      <Navbar />
-       <main className="grow container mx-auto px-4 py-8">
-         {children}
-       </main>
+        <ThemeProvider
+          defaultTheme="system"
+          storageKey="ui-theme"
+        >
+          <div className="flex flex-col min-h-screen">
+            <Navbar />
+            <main className="grow container mx-auto px-4 py-8">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
