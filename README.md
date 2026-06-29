@@ -6,7 +6,7 @@
 
 A modern **full-stack e-commerce platform** built using **Next.js**, **React**, and **TypeScript**. Browse products, manage your cart, and checkout smoothly using Stripe — all wrapped in a futuristic, cyber-themed interface.
 
-🔗 **Live Demo:** https://eshemeta.vercel.app/
+🔗 **Live App:** https://eshemeta.vercel.app/
 
 ---
 
